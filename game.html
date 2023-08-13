@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bitcoin Flip</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+    }
+    
+    h1 {
+      margin-top: 50px;
+      font-size: 36px;
+    }
+    
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+    }
+    
+    #coin {
+      width: 180px;
+      height: 180px;
+      margin-bottom: 30px;
+    }
+    
+    #result {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+    
+    #wallet {
+      font-size: 20px;
+      margin-top: 60px;
+    }
+    
+    #bet {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+    
+    #play {
+      font-size: 24px;
+      padding: 10px 20px;
+      background-color: #f2a900;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    #play:disabled {
+      background-color: #777;
+      cursor: not-allowed;
+    }
+    
+    #message {
+      font-size: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bitcoin Flip</h1>
+  
+  <div class="container">
+    <div>
+      <img id="coin" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png" alt="Coin" />
+      <div>
+        <button id="play" disabled>Play</button>
+        <p id="result"></p>
+      </div>
+      <div>
+        <p id="wallet">Send <span id="betAmount">50</span> satoshis to</p>
+        <p id="bitcoinWallet">1abcdeFGHijKLMNoPQRstuVwxyz</p>
+      </div>
+      <p id="message">Waiting for payment...</p>
+    </div>
+  </div>
+  
+  <script>
+    // Replace the bitcoin wallet address with your own!
+    const bitcoinWallet = "1abcdeFGHijKLMNoPQRstuVwxyz";
+    const betAmount = 50; // In satoshis
+    
+    // Function to generate a random number
+    function flipCoin() {
+      return Math.random() < 0.5 ? "Heads" : "Tails";
+    }
+    
+    // Function to handle the play button click event
+    function play() {
+      const result = flipCoin();
+      document.getElementById("result").innerHTML = `Result: ${result}`;
+      document.getElementById("wallet").style.display = "none";
+      document.getElementById("play").disabled = true;
+      document.getElementById("message").innerHTML = "Processing payment...";
+      
+      // Simulating payment verification (5 seconds delay)
+      setTimeout(() => {
+        document.getElementById("message").innerHTML = `You ${result === "Heads" ? "won" : "lost"} ${betAmount} satoshis!`;
+      }, 5000);
+    }
+    
+    // Display the bitcoin wallet address and enable the play button
+    document.getElementById("bitcoinWallet").innerHTML = bitcoinWallet;
+    document.getElementById("betAmount").innerHTML = betAmount;
+    document.getElementById("play").disabled = false;
+    document.getElementById("play").addEventListener("click", play);
+  </script>
+</body>
+</html>
