@@ -17,6 +17,7 @@
     
     .container {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 80vh;
@@ -69,7 +70,7 @@
   
   <div class="container">
     <div>
-      <img id="coin" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png" alt="Coin" />
+      <img id="coin" src="coin.png" alt="Coin" />
       <div>
         <button id="play" disabled>Play</button>
         <p id="result"></p>
@@ -80,6 +81,7 @@
       </div>
       <p id="message">Waiting for payment...</p>
     </div>
+    <audio id="coinSound" src="https://free-loops.com/data/mp3/3a/e7/f7b059b5dcfae53d7ce8e0128948.mp3"></audio>
   </div>
   
   <script>
@@ -99,6 +101,10 @@
       document.getElementById("wallet").style.display = "none";
       document.getElementById("play").disabled = true;
       document.getElementById("message").innerHTML = "Processing payment...";
+      
+      // Play coin flip sound
+      const coinSound = document.getElementById("coinSound");
+      coinSound.play();
       
       // Simulating payment verification (5 seconds delay)
       setTimeout(() => {
